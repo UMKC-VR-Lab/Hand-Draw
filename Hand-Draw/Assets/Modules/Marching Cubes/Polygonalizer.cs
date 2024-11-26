@@ -5,7 +5,7 @@ namespace MarchingCubes
 {
     public class Polygonalizer : MonoBehaviour
     {
-        public static void PolygonalizeCube(float isoLevel, float size, Vector3 position, ref List<float> pointValues, ref List<Vector3> vertices, ref List<int> triangles)
+        public static void PolygonalizeCube(float isoLevel, float cubeSize, Vector3 position, ref List<float> pointValues, ref List<Vector3> vertices, ref List<int> triangles)
         {
             //Find the index of the triangle configuration.
             int cubeIndex = FindIndex(isoLevel, pointValues);
@@ -14,7 +14,7 @@ namespace MarchingCubes
             if (cubeIndex == 0 || cubeIndex == 255) return;
 
             //Add vertices and triangles.
-            AddVertices(cubeIndex, position, size, isoLevel, ref pointValues, ref vertices, ref triangles);
+            AddVertices(cubeIndex, position, cubeSize, isoLevel, ref pointValues, ref vertices, ref triangles);
         }
         
         private static int FindIndex(float isoLevel, List<float> pointValues)
@@ -26,7 +26,7 @@ namespace MarchingCubes
             return cubeIndex;
         }
         
-        private static void AddVertices(int cubeIndex, Vector3 position, float size, float isoLevel, ref List<float> pointValues, ref List<Vector3> vertices, ref List<int> triangles)
+        private static void AddVertices(int cubeIndex, Vector3 position, float cubeSize, float isoLevel, ref List<float> pointValues, ref List<Vector3> vertices, ref List<int> triangles)
         {
             for (int i = 0; tbl.tris[cubeIndex, i] != -1; i += 3)
             {
@@ -39,9 +39,9 @@ namespace MarchingCubes
                 int a2 = tbl.cornerIndexAFromEdge[tbl.tris[cubeIndex, i + 2]];
                 int b2 = tbl.cornerIndexBFromEdge[tbl.tris[cubeIndex, i + 2]];
 
-                vertices.Add((VertexInterp(isoLevel, tbl.points[a0], tbl.points[b0], pointValues[a0], pointValues[b0]) + position) * size);
-                vertices.Add((VertexInterp(isoLevel, tbl.points[a1], tbl.points[b1], pointValues[a1], pointValues[b1]) + position) * size);
-                vertices.Add((VertexInterp(isoLevel, tbl.points[a2], tbl.points[b2], pointValues[a2], pointValues[b2]) + position) * size);
+                vertices.Add((VertexInterp(isoLevel, tbl.points[a0], tbl.points[b0], pointValues[a0], pointValues[b0]) + position) * cubeSize);
+                vertices.Add((VertexInterp(isoLevel, tbl.points[a1], tbl.points[b1], pointValues[a1], pointValues[b1]) + position) * cubeSize);
+                vertices.Add((VertexInterp(isoLevel, tbl.points[a2], tbl.points[b2], pointValues[a2], pointValues[b2]) + position) * cubeSize);
                 triangles.Add(triangles.Count);
                 triangles.Add(triangles.Count);
                 triangles.Add(triangles.Count);

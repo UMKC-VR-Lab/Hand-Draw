@@ -12,14 +12,15 @@ public class AsynchMarcher : MonoBehaviour
     public GameObject meshPrefab;
 
     public float isoLevel = 0.5f, updateDuration = 0.1f;
+    private float scale = 100.0f;
     public int size = 1;
-    public int dimension = 10;
 
     private Dictionary<Vector3Int, GameObject> chunkMeshes = new Dictionary<Vector3Int, GameObject>();
     private Queue<GameObject> meshPool = new Queue<GameObject>();
 
     void Start()
     {
+        scale = densityManager.scale;
         StartCoroutine(UpdateDirtyChunks());
     }
 
@@ -59,7 +60,7 @@ public class AsynchMarcher : MonoBehaviour
         // Generate and assign the mesh asynchronously
         Mesh chunkMesh = await GenerateMeshAsync(chunkKey);
         ApplyMeshToGameObject(chunkObject, chunkMesh);
-        transform.localScale = Vector3.one / 100.0f;
+        transform.localScale = Vector3.one / scale;
     }
 
     private async void UpdateChunkMesh(Vector3Int chunkKey)
@@ -75,6 +76,7 @@ public class AsynchMarcher : MonoBehaviour
         List<Vector3> vertices = new List<Vector3>();
         List<int> triangles = new List<int>();
         List<float> pointValues = new List<float>(8);
+        int dimension = densityManager.chunkSize + 1;
 
         for (int i = 0; i < 8; i++)
             pointValues.Add(0.0f);
@@ -109,20 +111,27 @@ public class AsynchMarcher : MonoBehaviour
         });
 
         // Assign vertices and triangles to the mesh
-        mesh.vertices = vertices.ToArray();
-        mesh.triangles = triangles.ToArray();
-        mesh.RecalculateNormals();
+        if(mesh != null)
+        {
+            mesh.vertices = vertices.ToArray();
+            mesh.triangles = triangles.ToArray();
+            mesh.RecalculateNormals();
+        }
 
         return mesh;
     }
 
     private void ApplyMeshToGameObject(GameObject chunkObject, Mesh mesh)
     {
+        if(gameObject == null) return;
         var meshFilter = chunkObject.GetComponent<MeshFilter>();
+        if(gameObject == null) return;
         var meshCollider = chunkObject.GetComponent<MeshCollider>();
 
         if (meshFilter != null)
             meshFilter.mesh = mesh;
+                else
+            Debug.LogWarning($"MeshFilter missing on chunk object: {chunkObject.name}");
 
         if (meshCollider != null)
             meshCollider.sharedMesh = mesh;

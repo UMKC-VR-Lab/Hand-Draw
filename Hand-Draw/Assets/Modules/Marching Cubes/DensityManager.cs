@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine.Events;
 using UnityEngine;
 
 /*
@@ -16,10 +15,14 @@ using UnityEngine;
 *   Get Chunk Key
 *   Get Get Local Index
 */
+
 public class DensityManager : MonoBehaviour
 {
     // The edge dimensions of a chunk
     public int chunkSize = 10;
+
+    // The scale of blocks
+    public float scale = 100.0f;
 
     // The density field
     public Dictionary<Vector3Int, float[,,]> densityChunks = new Dictionary<Vector3Int, float[,,]>();
@@ -27,8 +30,6 @@ public class DensityManager : MonoBehaviour
     // All chunks which need to be polygonalized
     public HashSet<Vector3Int> dirtyChunks = new HashSet<Vector3Int>();
     
-    public UnityEvent onChunksBecameDirty;
-    public int scale = 100;
     // Returns the density of x,y,z, and 0 if there is no entry.
     public float GetDensity(int x, int y, int z)
     {

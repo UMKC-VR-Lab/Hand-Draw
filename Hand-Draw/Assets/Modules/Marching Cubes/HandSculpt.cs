@@ -13,6 +13,7 @@ public class HandSculpt : MonoBehaviour
 
     private void Awake()
     {
+        scale = densityManager.scale;
         if(GetFingerReferences() == false)
             StartCoroutine(WaitForFinger());
     }
@@ -53,14 +54,14 @@ public class HandSculpt : MonoBehaviour
         if (Vector3.Distance(targetThumb.position, indexFinger.position) < 0.05f)
         {
             Vector3 midpoint = (targetThumb.position + indexFinger.position) / 2.0f;
-            AddDensityWithBlur(0.5f, 0.1f, midpoint);
+            AddDensityWithBlur(0.1f, 0.1f, midpoint);
         }
 
         // If pinching middle finger to thumb
         if (Vector3.Distance(targetThumb.position, targetFinger.position) < 0.05f)
         {
             Vector3 midpoint = (targetThumb.position + targetFinger.position) / 2.0f;
-            AddDensityWithBlur(0.5f, 0.1f, midpoint);
+            AddDensityWithBlur(-0.1f, 0.1f, midpoint);
         }
     }
 
