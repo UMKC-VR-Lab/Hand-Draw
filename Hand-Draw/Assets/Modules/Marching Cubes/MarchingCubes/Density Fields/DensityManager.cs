@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine;
 
 /*
 * The density manager handles the density within space.
@@ -101,17 +101,4 @@ public class DensityManager : MonoBehaviour
             (z % chunkSize + chunkSize) % chunkSize
         );
     }
-    /*private Vector3Int GetLocalIndex(int x, int y, int z)
-    {
-        Vector3Int result = new Vector3Int(
-            x % chunkSize,
-            y % chunkSize,
-            z % chunkSize
-        );
-        if(x < 0)
-            result.x = chunkSize - Mathf.Abs(x % chunkSize) - 1;
-        if (z < 0)
-            result.z = chunkSize - Mathf.Abs(z % chunkSize) - 1;
-        return result;
-    }*/
 }
