@@ -1,37 +1,38 @@
-using System.Collections;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(MeshCollider)), RequireComponent(typeof(Mesh))]
 public class SimplexNoiseMarcher : MonoBehaviour
 {
+    // References
+    private SimplexNoise noiseGenerator = new SimplexNoise();
     private MeshCollider meshCollider;
-    public float isoLevel = 0.5f, size = 1.0f, speed = 2.0f;
     public Mesh mesh;
-    SimplexNoise noiseGenerator = new SimplexNoise();
-    List<float> pointValues = new List<float>();
-    float offsetTime = 0;
+
+    // Parameters
+    public float isoLevel = 0.5f, size = 1.0f, speed = 2.0f, updateDuration = 0.05f;
+    private float offsetTime = 0;
+    public int dimension = 10;
+
+    // Generation 
     public List<Vector3> vertices = new List<Vector3>();
     public List<int> triangles = new List<int>();
+    private List<float> pointValues = new List<float>(new float[8]);
     private Vector3 tempVector3;
-    public int dimension = 10;
 
     void Start()
     {
-        meshCollider = GetComponent<MeshCollider>();
-        mesh = GetComponent<MeshFilter>().mesh;
+        // Ensure the meshCollider and mesh are referenced
+        if(meshCollider == null) meshCollider = GetComponent<MeshCollider>();
+        if(mesh == null) mesh = GetComponent<MeshFilter>().mesh;
 
-        for (int i = 0; i < 8; i++)
-        {
-            pointValues.Add(noiseGenerator.noise(tbl.points[i]));
-            //Debug.Log(points[i]);
-        }
         StartCoroutine("GenerateNewField");
     }
 
     public IEnumerator GenerateNewField()
     {
-        yield return new WaitForSeconds(0.05f);
-        //noiseGenerator = new SimplexNoise();
+        yield return new WaitForSeconds(updateDuration);
         vertices.Clear();
         triangles.Clear();
         mesh.Clear();
@@ -51,7 +52,6 @@ public class SimplexNoiseMarcher : MonoBehaviour
                     for (int i = 0; i < 8; i++)
                     {
                         pointValues[i] = noiseGenerator.noise(0.1f * (tbl.points[i] + Vector3.one * offsetTime + tempVector3));
-                        //March();
                     }
                     Polygonalizer.PolygonalizeCube(isoLevel, size, transform.position + tempVector3, ref pointValues, ref vertices, ref triangles);
                 }

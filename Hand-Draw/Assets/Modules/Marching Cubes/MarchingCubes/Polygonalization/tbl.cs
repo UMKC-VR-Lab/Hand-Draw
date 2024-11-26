@@ -39,6 +39,7 @@ public class tbl
         0xf00, 0xe09, 0xd03, 0xc0a, 0xb06, 0xa0f, 0x905, 0x80c,
         0x70c, 0x605, 0x50f, 0x406, 0x30a, 0x203, 0x109, 0x0
     };
+
     public static int[,] tris = new int[256, 16]
     {
         {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
@@ -298,14 +299,17 @@ public class tbl
         {0, 3, 8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
         {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}
     };
+
     public static int[] cornerIndexAFromEdge = new int[12]
     {
         0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3
     };
+
     public static int[] cornerIndexBFromEdge = new int[12]
     {
         1, 2, 3, 0, 5, 6, 7, 4, 4, 5, 6, 7
     };
+
     public static Vector3[] points = new Vector3[8]
     {
         new Vector3(0,0,0),
@@ -317,6 +321,7 @@ public class tbl
         new Vector3(1,1,1),
         new Vector3(1,1,0)
     };
+
     public static int[] powsOfTwo = new int[8]
     {
         1, 2, 4, 8, 16, 32, 64, 128

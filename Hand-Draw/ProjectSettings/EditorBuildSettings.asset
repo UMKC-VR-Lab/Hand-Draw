@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Noise-Marcher.unity
-    guid: e0d264b56fb52f143be1ab09518aa5ad
+    path: Assets/Scenes/Hand-Template.unity
+    guid: d4aa645e46526c24d96f0f256f43dbee
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: f852ca87c9dfc9f4cb374699d2d4c529, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

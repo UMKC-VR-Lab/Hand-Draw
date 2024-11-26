@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ public class Polygonalizer : MonoBehaviour
         int cubeIndex = FindIndex(isoLevel, pointValues);
 
         //If we're not on the surface, stop.
-        if (OnEdgeOfSurface(cubeIndex)) return;
+        if (cubeIndex == 0 || cubeIndex == 255) return;
 
         //Add vertices and triangles.
         AddVertices(cubeIndex, position, size, isoLevel, ref pointValues, ref vertices, ref triangles);
@@ -44,10 +43,7 @@ public class Polygonalizer : MonoBehaviour
             triangles.Add(triangles.Count);
         }
     }
-    private static bool OnEdgeOfSurface(int cubeIndex)
-    {
-        return cubeIndex == 0 || cubeIndex == 255;
-    }
+
     private static Vector3 VertexInterp(float isoLevel, Vector3 p1, Vector3 p2, float valp1, float valp2)
     {
         if (Mathf.Abs(isoLevel - valp1) < 0.00001f) return (p1);

@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class DensityField : MonoBehaviour
 {
-    public int dimension = 10;
     public float[,,] densityField;
     public GameObject[,,] indicatorSpheres;
     public GameObject sphere;
+    
+    public int dimension = 10;
+    public bool debugSpheres = false;
 
     private void Start()
     {
@@ -29,7 +31,6 @@ public class DensityField : MonoBehaviour
         }
     }
 
-    public bool debugSpheres = false;
     private void FixedUpdate()
     {
         if(debugSpheres)
