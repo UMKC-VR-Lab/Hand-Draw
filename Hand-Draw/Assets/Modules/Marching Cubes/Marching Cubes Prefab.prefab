@@ -299,10 +299,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4816733579823887462}
   - component: {fileID: 5212306385682468211}
-  - component: {fileID: 3607013430899115961}
   - component: {fileID: 3338687054191204227}
+  - component: {fileID: 3607013430899115961}
   m_Layer: 0
-  m_Name: DensityManager
+  m_Name: Marching Cubes Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -345,24 +345,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   scale: 100
---- !u!114 &3607013430899115961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8570834767629272326}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a9cce25155351144abae098d7504113, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  densityManager: {fileID: 5212306385682468211}
-  sphereSpacing: 0.01
-  sphereSize: 0.05
-  debugViewDistance: 50
-  sphereMesh: {fileID: 289301614986012343, guid: 4c921121c7ebce740b49b41acd4fcf93, type: 3}
-  sphereMaterial: {fileID: 2100000, guid: 2d362ef406c661c4e94bf185cb013b45, type: 2}
 --- !u!114 &3338687054191204227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,6 +363,24 @@ MonoBehaviour:
   updateDuration: 0.1
   size: 1
   dimension: 11
+--- !u!114 &3607013430899115961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8570834767629272326}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a9cce25155351144abae098d7504113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  densityManager: {fileID: 5212306385682468211}
+  sphereSpacing: 0.01
+  sphereSize: 0.05
+  debugViewDistance: 50
+  sphereMesh: {fileID: 289301614986012343, guid: 4c921121c7ebce740b49b41acd4fcf93, type: 3}
+  sphereMaterial: {fileID: 2100000, guid: 2d362ef406c661c4e94bf185cb013b45, type: 2}
 --- !u!1 &8668068984137023241
 GameObject:
   m_ObjectHideFlags: 0

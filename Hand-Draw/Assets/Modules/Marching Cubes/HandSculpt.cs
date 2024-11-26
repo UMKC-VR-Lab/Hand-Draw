@@ -13,20 +13,24 @@ public class HandSculpt : MonoBehaviour
 
     private void Awake()
     {
-        StartCoroutine(WaitForFinger());
+        if(GetFingerReferences() == false)
+            StartCoroutine(WaitForFinger());
     }
 
     private IEnumerator WaitForFinger()
     {
         yield return new WaitForSeconds(1.0f);
+        if(GetFingerReferences() == false)
+            StartCoroutine(WaitForFinger());
+    }
 
-        // Use GetTransformByHandJointId to retrieve specific finger tips
+    private bool GetFingerReferences()
+    {
         targetThumb = handVisual.GetTransformByHandJointId(Oculus.Interaction.Input.HandJointId.HandThumbTip);
         indexFinger = handVisual.GetTransformByHandJointId(Oculus.Interaction.Input.HandJointId.HandIndexTip);
         targetFinger = handVisual.GetTransformByHandJointId(Oculus.Interaction.Input.HandJointId.HandMiddleTip);
-
-        if (targetFinger == null || indexFinger == null || targetThumb == null)
-            StartCoroutine(WaitForFinger());
+        // returns true if all references found
+        return (targetFinger != null && indexFinger != null && targetThumb != null);
     }
 
     private void FixedUpdate()
@@ -82,16 +86,5 @@ public class HandSculpt : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void SetDensityForFinger(Vector3 fingerPosition)
-    {
-        // Scale and floor the position to grid coordinates
-        int x = Mathf.FloorToInt(fingerPosition.x * scale);
-        int y = Mathf.FloorToInt(fingerPosition.y * scale);
-        int z = Mathf.FloorToInt(fingerPosition.z * scale);
-
-        // Set density to 1 at the exact grid position of the finger tip
-        densityManager.SetDensity(1.0f, x, y, z);
     }
 }
