@@ -2032,6 +2032,8 @@ MonoBehaviour:
   tiltAlongAxisZ: 0
   tiltAlongAxisX: 0
   trackHead: 1
+  smoothUpdates: 1
+  smoothingSpeed: 5
 --- !u!4 &1984689232
 Transform:
   m_ObjectHideFlags: 0

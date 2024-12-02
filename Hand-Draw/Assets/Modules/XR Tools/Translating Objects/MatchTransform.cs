@@ -4,11 +4,11 @@ public class MatchTransform : MonoBehaviour
 {
     public Transform source;
     public Transform target;
-    public float positionLagTime = 0.5f; // Seconds to lag behind source position
-    public float rotationLagTime = 0.5f; // Seconds to lag behind source rotation
+    public float positionLagTime = 0.5f;
+    public float rotationLagTime = 0.5f;
 
     private Vector3 positionVelocity;
-    private float angularVelocity; // Use float for angular velocity magnitude
+    private float angularVelocity;
 
     private void Update()
     {
